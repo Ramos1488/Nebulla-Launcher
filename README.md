@@ -37,6 +37,33 @@ natural next thing to add (see `nebula_launcher/mojang_api.py` for where the
 version-json pipeline lives; a loader installer would inject its own version json
 the same way vanilla ones are downloaded).
 
+## Publishing releases via GitHub Actions
+This repo ships `.github/workflows/build.yml`. It builds a standalone binary
+for Windows, macOS and Linux with PyInstaller and attaches them to a GitHub
+Release automatically.
+
+1. Create a new repo on GitHub and push this project:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit: Nebula Launcher"
+   git branch -M main
+   git remote add origin https://github.com/<you>/nebula-launcher.git
+   git push -u origin main
+   ```
+2. Push a version tag to trigger a build + release:
+   ```bash
+   git tag v0.1.0
+   git push origin v0.1.0
+   ```
+3. Check the **Actions** tab — three jobs build in parallel (Windows/macOS/Linux),
+   then a `release` job collects the zips and publishes a GitHub Release with
+   `NebulaLauncher-windows.zip`, `NebulaLauncher-macos.zip`, `NebulaLauncher-linux.zip`.
+4. You can also trigger a build without tagging via **Actions → Build & Release →
+   Run workflow** (`workflow_dispatch`) — useful for testing before your first release.
+
+Licensed under **GPL-3.0** (see `LICENSE`) — same license PolyMC/Prism Launcher use.
+
 ## Project layout
 ```
 nebula_launcher/
