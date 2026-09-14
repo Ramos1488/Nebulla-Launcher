@@ -21,7 +21,7 @@ instance-based, multi-version, offline + Microsoft account support.
 ## Install & run
 ```bash
 pip install -r requirements.txt
-python -m nebula_launcher.main
+python run.py
 ```
 
 ## Microsoft account login
